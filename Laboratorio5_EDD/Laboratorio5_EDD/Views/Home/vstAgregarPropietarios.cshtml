@@ -1,0 +1,46 @@
+﻿
+@{
+    ViewData["Title"] = "vstAgregarPropietarios";
+}
+
+<div class="container">
+    <div class="card border border-black rounded">
+
+        <div class="card-header">
+
+            <h5 class="card-title text-center">Guardar Autos</h5>
+        </div>
+        <div class="card-body">
+            <form asp-controller="Autos" asp-action="GuardarCarro">
+                <div class="form-group">
+                    <label for="txtPlaca" class="form-label">Placa:</label>
+                    <input type="text" id="txtPlaca" name="txtPlaca" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label for="txtColor" class="form-label">Color:</label>
+                    <input type="color" id="txtColor" name="txtColor" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label for="txtPropietario" class="form-label">Propietario:</label>
+                    <input type="text" id="txtPropietario" name="txtPropietario" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col">
+                            <label for="NudLatitud" class="form-label">Latitud:</label>
+                            <input type="text" id="NudLatitud" name="NudLatitud" class="form-control" />
+                        </div>
+                        <div class="col">
+                            <label for="NudLongitud" class="form-label">Longitud:</label>
+                            <input type="text" id="NudLongitud" name="NudLongitud" class="form-control" />
+                        </div>
+                    </div>
+
+                </div>
+                <div class="d-flex align-items-center justify-content-center mt-5">
+                    <input type="submit" class="btn btn-primary" value="Guardar Auto">
+                </div>
+            </form>
+    </div>
+</div>
+</div>

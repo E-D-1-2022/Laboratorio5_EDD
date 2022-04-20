@@ -6,20 +6,13 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
-using CustomStructures.Tree;
-
+using Laboratorio5_EDD.Entidad;
 namespace Laboratorio5_EDD.Controllers
 {
-    public class Cliente {
-    
-}
+
     public class HomeController : Controller
     {
-        public static int comp(Cliente cl1, Cliente cl2) {
-            return 1;
-        
-        }
-        Btree<Cliente> Btree = new Btree<Cliente>(2,comp);
+       
         
         private readonly ILogger<HomeController> _logger;
 
@@ -30,8 +23,9 @@ namespace Laboratorio5_EDD.Controllers
 
         public IActionResult Index()
         {
-            Cliente clien = new Cliente();
-            Btree.add(clien);
+            return View();
+        }
+        public IActionResult vstAgregarPropietarios() {
             return View();
         }
 

@@ -1,0 +1,30 @@
+﻿
+@{
+    ViewData["Title"] = "GuardarCarro";
+}
+
+@if (ViewBag.Message != null)
+{
+    <script type="text/javascript">
+            window.onload = function () {
+                alert("@ViewBag.Message");
+                window.location.href = "../Home/vstAgregarPropietarios";
+            };
+    </script>
+}
+else
+{
+    <div class="card">
+        <h5 class="card-header text-center">Ingreso Exitoso</h5>
+        <div class="card-body">
+            <h5 class="card-title text-center">Carro insertado Exitosamente</h5>
+            <p class="card-text text-center">@ViewData["Mensaje"]</p>
+            <div class="btn-group d-flex justify-content-center align-items-center" role="group" aria-label="Basic mixed styles example">
+                @*<a class="btn btn-danger mx-3" asp-area="" asp-controller="Player" asp-action="FrmIngresarJugadores">Ingresar nuevo jugador</a>
+                <a class="btn btn-primary mx-3" asp-area="" asp-controller="Player" asp-action="FrmIngresarJugadores">Listar jugadores</a>
+                <a class="btn btn-warning mx-3" asp-area="" asp-controller="Home" asp-action="Index">Regresar al inicio</a>*@
+            </div>
+        </div>
+    </div>
+
+}

@@ -4,11 +4,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Laboratorio5_EDD.DTO;
+using Laboratorio5_EDD.Entidad;
 using System.Drawing;
 namespace Laboratorio5_EDD.Controllers
 {
     public class AutosController : Controller
     {
+
         public IActionResult Index()
         {
             return View();
@@ -53,7 +55,7 @@ namespace Laboratorio5_EDD.Controllers
             }
             AutosDto.color = Color.FromName(Request.Form["txtColor"].ToString());
             AutosDto.Propietario = Request.Form["txtPropietario"].ToString();
-            if (ComprobarNumeros(Request.Form["NudLatitud"].ToString(), -90, 90) != -1)
+            if (ComprobarNumeros(Latitud, -90, 90) != -1)
             {
                 AutosDto.Latitud = Convert.ToDecimal(Request.Form["NudLatitud"].ToString());
             }
@@ -62,7 +64,7 @@ namespace Laboratorio5_EDD.Controllers
                 return View();
             }
 
-            if (ComprobarNumeros(Request.Form["NudLongitud"].ToString(), -180, 180) != -1)
+            if (ComprobarNumeros(Longitud, -180, 180) != -1)
             {
                 AutosDto.Longitud = Convert.ToDecimal(Request.Form["NudLongitud"].ToString());
             }
@@ -70,8 +72,20 @@ namespace Laboratorio5_EDD.Controllers
                 ViewBag.Message = "La logitud se sale del rango de -180 y 180";
                 return View();
             }
-
+            BaseDeDatos.ListaAutos.Add(AutosDto);
             ViewData["Mensaje"] = "Auto con placa: " + AutosDto.Placa + " Del Propietario: " + AutosDto.Propietario;
+            return View();
+        }
+        public IActionResult ListAutos() {
+            List<AutosDTO> Lista = BaseDeDatos.ListaAutos.inOrder();
+            Lista.RemoveAll(x=> x.Placa==0);
+            ViewData["ListaAutos"] = Lista;
+            return View();
+        }
+        [HttpGet]
+        public IActionResult EliminarAuto(int placa) {
+            AutosDTO auto = BaseDeDatos.ListaAutos.Find(new AutosDTO { Placa = placa });
+            BaseDeDatos.ListaAutos.Remove(auto);
             return View();
         }
     }

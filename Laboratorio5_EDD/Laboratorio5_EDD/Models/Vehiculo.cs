@@ -5,6 +5,7 @@ using System.Drawing;
 
 namespace Laboratorio5_EDD.Models
 {
+
     public class Vehiculo
     {
         public Vehiculo(int Placa, Color Colorr, string Propietario, decimal Latitud, decimal Longitud)

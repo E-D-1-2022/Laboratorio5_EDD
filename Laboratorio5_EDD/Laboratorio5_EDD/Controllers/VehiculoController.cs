@@ -48,6 +48,7 @@ namespace Laboratorio5_EDD.Controllers
                                 Latitud = Convert.ToInt32(info[3]),
                                 Longitud = Convert.ToInt32(info[4]),
                             };
+
                         }
                     }
                 }

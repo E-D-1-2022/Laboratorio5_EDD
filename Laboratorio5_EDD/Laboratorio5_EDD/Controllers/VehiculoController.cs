@@ -1,83 +1,64 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Laboratorio5_EDD.DTO;
+using Laboratorio5_EDD.Entidad;
+using System.IO;
+using System.Drawing;
+using System;
 
 namespace Laboratorio5_EDD.Controllers
 {
     public class Vehiculo : Controller
     {
-        // GET: Vehiculo
-        public ActionResult Index()
+        [Route("SubirArchivo")]
+        public IActionResult SubirArchivos()
         {
             return View();
         }
 
-        // GET: Vehiculo/Details/5
-        public ActionResult Details(int id)
-        {
+        [HttpPost("SubirArchivo")]
+       public IActionResult SubirArchivos(IFormFile file)
+       {
+            if(file !=null)
+            {
+                try
+                {
+                    //Sube archivo a carpeta temporal
+                    string ruta = Path.Combine(Path.GetTempPath(), file.Name);
+                    using(var stream = new FileStream(ruta, FileMode.Create))
+                    {
+                        file.CopyTo(stream);
+                    }
+
+                    //Lee el archivo
+                    string allFileData = System.IO.File.ReadAllText(ruta);
+
+                    //Recorre archivo
+                    foreach(string lineaActual in allFileData.Split('\n'))
+                    {
+                        if(!string.IsNullOrEmpty(lineaActual))
+                        {
+                            string[] info = lineaActual.Split(',');
+
+                            new AutosDTO
+                            {
+                                Placa = Convert.ToInt32(info[0]),
+                                color = Color.FromName(info[1]),
+                                Propietario = info[2],
+                                Latitud = Convert.ToInt32(info[3]),
+                                Longitud = Convert.ToInt32(info[4]),
+                            };
+
+                        }
+                    }
+                }
+                catch(Exception ex)
+                {
+                    ViewBag.Error = ex.Message;
+                }
+            }
             return View();
-        }
-
-        // GET: Vehiculo/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: Vehiculo/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: Vehiculo/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: Vehiculo/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: Vehiculo/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: Vehiculo/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
+       }
+        
     }
 }

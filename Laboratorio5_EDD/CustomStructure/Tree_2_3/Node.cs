@@ -45,11 +45,14 @@ namespace CustomStructure.Tree_2_3
         }
         public bool is2Node()
         {
+            if (rightElement == null || rightElement.Equals(default(T))) { rightElement = (T)Activator.CreateInstance(typeof(T)); }
+
             return rightElement.Equals(null) || rightElement.Equals(default(T));
         }
         public bool is3Node()
         {
-                 return !rightElement.Equals(null) || !rightElement.Equals(default(T));
+            if (rightElement == null || rightElement.Equals(default(T))) { rightElement = (T)Activator.CreateInstance(typeof(T)); }
+            return !rightElement.Equals(null) || !rightElement.Equals(default(T));
         }
         public bool isBalanced()
         {

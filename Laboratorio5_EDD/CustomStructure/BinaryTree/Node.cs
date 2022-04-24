@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CustomStructure.BinaryTree
 {
-     public class Node<T>
+    public class Node<T>
     {
         public T Value { get; set; }
 
@@ -16,3 +16,5 @@ namespace CustomStructure.BinaryTree
 
     }
 }
+
+

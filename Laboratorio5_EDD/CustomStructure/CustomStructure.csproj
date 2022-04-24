@@ -43,10 +43,13 @@
   <ItemGroup>
     <Compile Include="AvlTree\AvlTree.cs" />
     <Compile Include="AvlTree\Node.cs" />
-    <Compile Include="BinaryThree\BinaryTree.cs" />
-    <Compile Include="BinaryThree\Node.cs" />
+    <Compile Include="BinaryTree\BinaryTree.cs" />
+    <Compile Include="BinaryTree\Node.cs" />
+    <Compile Include="Itree _2_3.cs" />
     <Compile Include="Itree.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tree_2_3\Node.cs" />
+    <Compile Include="Tree_2_3\TwoThreeTree.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

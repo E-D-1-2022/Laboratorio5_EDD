@@ -1,0 +1,57 @@
+﻿@using Laboratorio5_EDD.DTO;
+
+@{
+    ViewData["Title"] = "ListAutos";
+}
+
+<h1>ListAutos</h1>
+
+<p>
+
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Placa
+            </th>
+            <th>
+                Color
+            </th>
+            <th>
+                Propietario
+            </th>
+            <th>
+                Latitud
+            </th>
+            <th>
+                Logitud
+            </th>
+
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in ViewData["ListaAutos"] as List<AutosDTO>) {
+        <tr>
+            <td>
+                @item.Placa
+            </td>
+            <td>
+                @item.color.Name.ToString()
+            </td>
+            <td>
+                @item.Propietario
+            </td>
+            <td>
+                @item.Latitud
+            </td>
+            <td>
+                @item.Longitud
+            </td>
+            <td>
+                <a class="nav-link text-dark" asp-area="" asp-controller="Autos" asp-route-Placa="@item.Placa" asp-action="EliminarAuto">Eliminar carro</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

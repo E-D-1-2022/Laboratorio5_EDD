@@ -224,7 +224,7 @@ using System.Threading.Tasks;
                     else
                     {
                         // Recursive cases
-                        if (compareTo(current.leftElement,element) == Tree23<T>.ROOT_IS_BIGGER)
+                        if (compareTo(element, current.leftElement) == Tree23<T>.ROOT_IS_BIGGER)
                         {
                             found = findI(current.left, element);
                         }
@@ -234,7 +234,7 @@ using System.Threading.Tasks;
                             found = findI(current.mid, element);
                         }
                         else
-                        if (compareTo(current.rightElement,element) == Tree23<T>.ROOT_IS_SMALLER)
+                        if (compareTo(element, current.rightElement) == Tree23<T>.ROOT_IS_SMALLER)
                         {
                             found = findI(current.right, element);
                         }

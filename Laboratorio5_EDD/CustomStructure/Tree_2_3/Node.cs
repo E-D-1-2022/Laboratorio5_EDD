@@ -60,7 +60,7 @@ namespace CustomStructure.Tree_2_3
             var balanced = false;
             if (isLeaf())
             {
-                // If we are at the deepest level (the leaf), it is well-balanced for sure
+                // Si estamos en el nivel más profundo (la hoja), seguramente esta bien equilibrado 
                 balanced = true;
             }
             else
@@ -93,7 +93,7 @@ namespace CustomStructure.Tree_2_3
             T max = default(T);
             if (!isLeaf())
             {
-                // Recursive case, we are not on the deepest level
+                // Caso recursivo, no estamos en el nivel más profundo
                 if (!rightElement.Equals(default(T)))
                 {
                     if (right == null) { right = new Node<T>(); }
@@ -107,7 +107,7 @@ namespace CustomStructure.Tree_2_3
             }
             else
             {
-                // Trivial case, we are on the deepest level of the tree
+                // Estamos en el nivel más profundo del árbol
                 if (!rightElement.Equals(default(T)))
                 {
                     max = rightElement;
@@ -123,7 +123,7 @@ namespace CustomStructure.Tree_2_3
             {
                 rebalance();
             }
-            // Keep calm and rebalance
+            // Reequilibrar
             return max;
         }
         public T replaceMin()
@@ -131,24 +131,23 @@ namespace CustomStructure.Tree_2_3
             T min = default(T);
             if (!isLeaf())
             {
-                // Cas recursiu, mentre no arribem al nivell mes profund anem baixant per l'esquerra sempre
-                min = left.replaceMin();
+                // Caso recursivo, mientras no llegamos al nivel mas profundo vamos bajando por la izquierda siempre 
             }
             else
             {
-                // Cas trivial, agafem l'element i ho intentem deixar tot maco
+                // Tomamos el elemento y lo dejamos en buenas condiciones
                 min = leftElement;
                 leftElement = default(T);
                 if (rightElement != null)
                 {
-                    // Hi havia element a la dreta, el passem a l'esquerra i aqui no ha passat res!
+                    // Había elemento a la derecha, lo pasamos a la izquierda
                     leftElement = rightElement;
                     rightElement = default(T);
                 }
             }
             if (!isBalanced())
             {
-                // Aquesta situacio es dona quan a la dreta no hi havia element, en la 1a pujada rebalancejara
+                // A la derecha no había elemento, en la priemera subida rebalancea
                 rebalance();
             }
             return min;
@@ -159,12 +158,12 @@ namespace CustomStructure.Tree_2_3
             {
                 if (left.leftElement.Equals(default(T)))
                 {
-                    // The unbalance is in the left child
-                    // We put the left element of current Node<T> as the left element of the left child
+                    // El desequilibrio está en el hijo izquierdo
+                    // Ponemos el elemento izquierdo del Nodo<T> actual como elemento izquierdo del hijo izquierdo
                     left.leftElement=leftElement;
-                    // Now we replace the left element of the mid child as the left element of the current Node<T>
+                    // Ahora reemplazamos el elemento izquierdo del hijo mediano como el elemento izquierdo del Nodo<T> actual
                     leftElement=mid.leftElement;
-                    // If a right element on the mid child exists, we shift it to the left
+                    // Si existe un elemento derecho en el hijo mediano, los desplazamos a la izquierda
                     if (!mid.rightElement.Equals(default(T)))
                     {
                         mid.leftElement=mid.rightElement;
@@ -178,16 +177,16 @@ namespace CustomStructure.Tree_2_3
                 else
                 if (mid.leftElement.Equals(default(T)))
                 {
-                    // The unbalance is in the right child
-                    // CRITICAL CASE, each Node<T> (child) of the deepest level have just one element (the right is empty)
-                    // the algorithm will have to rebalance from a higher level of the tree
+                    // El desequilibrio está en el hijo de la derecha
+                    // CASO CRÍTICO, cada Nodo<T> (hijo) del nivel más profundo tiene un solo elemento(el derecho está vacIo)
+                    // El algoritmo tendrá que reequilibrar desde un nivel superior del árbol
                     if (rightElement.Equals(default(T)))
                     {
                         if (!left.leftElement.Equals(default(T))&& left.rightElement.Equals(default(T)) && mid.leftElement.Equals(default(T)))
                         {
                             rightElement=leftElement;
                             leftElement = left.leftElement;
-                            // Let the party starts, we remove the current childs
+                            // Quitamos a los niños actuales
                            left=(null);
                             mid=(null);
                             right=(null);
@@ -207,7 +206,7 @@ namespace CustomStructure.Tree_2_3
                             }
                             if (left.leftElement.Equals(default(T)) && mid.leftElement.Equals(default(T)))
                             {
-                                // The other but same case the party starts
+                               
                                 left=(null);
                                 mid=(null);
                                 right=(null);
@@ -216,12 +215,12 @@ namespace CustomStructure.Tree_2_3
                     }
                     else
                     {
-                        // We put the right element of the current Node<T> as the left element of the mid son
+                        // Ponemos el elemento derecho del Nodo<T> actual como elemento izquierdo del hijo medio 
                         mid.leftElement = rightElement;
-                        // We put the left element of the right child as the right element of the current Node<T>
+                        // Ponemos el elemento izquierdo del Nodo<T> actual como elemento izquierdo del hijo medio 
                         rightElement = right.leftElement;
-                        // If the right child, where we have taken the last element has a right element, we move it
-                        // into the left of the same child
+                        // Si el hijo derecho, donde hemos tomado el último elemento tiene un elemento derecho, lo movemos
+                        // A la izquierda del mismo hijo
                         if (!right.rightElement.Equals(default(T)))
                         {
                             right.leftElement = right.rightElement;
@@ -229,7 +228,7 @@ namespace CustomStructure.Tree_2_3
                         }
                         else
                         {
-                            // Else, we let the right child EMPTY
+                            // Si no, dejamos que el hijo derecho se vacíe
                             right.leftElement = default(T);
                         }
                     }

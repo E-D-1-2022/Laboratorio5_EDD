@@ -98,6 +98,7 @@ namespace Laboratorio5_EDD.Controllers
         public IActionResult CargarData(IFormFile file) {
             if (file != null)
             {
+                
                 try
                 {
                     //Sube archivo a carpeta temporal

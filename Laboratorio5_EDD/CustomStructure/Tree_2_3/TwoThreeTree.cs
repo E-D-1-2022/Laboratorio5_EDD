@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 {
     public class Tree23<T>:Itree_2_3<T>
     {
-        private Node<T> root=null;
+        private Node<T> root;
         // The root of the tree
         private int Size;
         // Number of elements inside of the tree
@@ -19,7 +19,7 @@ using System.Threading.Tasks;
         // A flag to know if the last element has been added correctly or not
         public Tree23(Func<T, T, int> compareTo,Func<T,T,bool>compa)
         {
-            root = new Node<T>();
+            
             this.Size = 0;
             this.compareTo = compareTo;
             this.comp = compa;
@@ -28,10 +28,10 @@ using System.Threading.Tasks;
         {
             this.Size++;
             addition = false;
-            if (root.Equals(default(T)))
+            if (root== null)
             {
                 // first case
-                if (root.Equals(default(T)))
+                if (root==null)
                 {
                     root = new Node<T>();
                 }
@@ -42,7 +42,7 @@ using System.Threading.Tasks;
             {
                 var newRoot = addElementI(root, element);
                 // Immersion
-                if (!newRoot.Equals(default(T)))
+                if (newRoot!=null)
                 {
                     root = newRoot;
                 }
@@ -436,7 +436,7 @@ using System.Threading.Tasks;
             deleted = removeI(root, element); // Immersion
 
             root.rebalance();
-
+            if (root.leftElement == null) { root.leftElement = (T)Activator.CreateInstance(typeof(T)); }
             if (root.leftElement.Equals(default(T))) { root = null; } // We have deleted the last element of the tree
 
             if (!deleted) { this.Size++; }

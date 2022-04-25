@@ -68,6 +68,7 @@ namespace CustomStructure.Tree_2_3
                 if (left == null) { left = new Node<T>(); }
                 if (mid == null) { mid = new Node<T>(); }
                 if (right == null) { right = new Node<T>(); }
+                if (left.leftElement == null) { left.leftElement = (T)Activator.CreateInstance(typeof(T)); }
                 if (!left.leftElement.Equals(default(T)) && !mid.leftElement.Equals(default(T)))
                 {
                     if (!rightElement.Equals(default(T)))

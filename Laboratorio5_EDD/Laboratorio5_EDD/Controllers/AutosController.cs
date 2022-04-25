@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Web;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -13,6 +14,8 @@ namespace Laboratorio5_EDD.Controllers
 {
     public class AutosController : Controller
     {
+        [BindProperty]
+        public UploadFile Subir_Archivos { get; set; }
 
         public IActionResult Index()
         {
@@ -137,5 +140,8 @@ namespace Laboratorio5_EDD.Controllers
             }
             return View();
         }
+    }
+    public class UploadFile { 
+        public IFormFile file { get; set; }
     }
 }

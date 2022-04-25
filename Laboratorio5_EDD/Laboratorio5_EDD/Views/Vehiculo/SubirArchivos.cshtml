@@ -1,0 +1,8 @@
+﻿@{
+    ViewData["Title"] = "Carga de CSV";
+}
+<h2>@ViewData["Title"]</h2>
+
+    <label for="file"> Subir Archivo</label>
+    <input type = "file" name ="file" id="file"/>
+   <button class="btn btn-danger" asp-controller="Upload" asp-action="ConfirmationUpload"> Cargar</button>

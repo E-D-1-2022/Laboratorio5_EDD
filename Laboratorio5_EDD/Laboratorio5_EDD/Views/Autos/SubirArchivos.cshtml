@@ -1,10 +1,10 @@
-﻿
+﻿@using Laboratorio5_EDD.DTO;
+@model IEnumerable<AutosDTO>
 @{
     ViewData["Title"] = "SubirArchivos";
 }
-
-
-<label for="file"> Subir Archivo</label>
-<input type="file" name="file" id="file" />
-<a class="btn btn-danger" asp-controller="Autos" asp-action="CargarData"> Cargar Data</a>
-
+@using (Html.BeginForm("CargarData","Autos", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <input type="file" name="file" /> 
+    <button type="submit" asp-controller="Autos" asp-action="CargarData" class="btn btn-danger">Cargar data</button>
+}

@@ -31,30 +31,41 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in ViewData["ListaAutos"] as List<AutosDTO>) {
+        @if (ViewData["ListaAutos"] == null)
+        {
         <tr>
-            <td>
-                @item.Placa
-            </td>
-            <td>
-                @item.color.Name.ToString()
-            </td>
-            <td>
-                @item.Propietario
-            </td>
-            <td>
-                @item.Latitud
-            </td>
-            <td>
-                @item.Longitud
-            </td>
-            <td>
-                <a class="btn btn-danger" asp-controller="Autos" asp-route-Placa="@item.Placa" asp-action="EliminarAuto">Eliminar carro</a>
-            </td>
-            <td>
-                <input type="button" value="Editar" class="btn btn-default" />
-            </td>
-        </tr>
-}
+                    <td>
+                        No hay data
+                        </td>
+            </tr>}
+        else
+        {
+            @foreach (var item in ViewData["ListaAutos"] as List<AutosDTO>)
+            {
+                <tr>
+                    <td>
+                        @item.Placa
+                    </td>
+                    <td>
+                        @item.color.Name.ToString()
+                    </td>
+                    <td>
+                        @item.Propietario
+                    </td>
+                    <td>
+                        @item.Latitud
+                    </td>
+                    <td>
+                        @item.Longitud
+                    </td>
+                    <td>
+                        <a class="btn btn-secondary" asp-controller="Autos" asp-route-Placa="@item.Placa" asp-action="EditarVehiculo">Editar carro</a>
+
+                        <a class="btn btn-danger" asp-controller="Autos" asp-route-Placa="@item.Placa" asp-action="EliminarAuto">Eliminar carro</a>
+                    </td>
+                </tr>
+            }
+
+        }
     </tbody>
 </table>

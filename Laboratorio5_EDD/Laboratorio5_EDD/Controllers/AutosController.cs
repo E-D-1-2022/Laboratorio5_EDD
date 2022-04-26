@@ -63,7 +63,7 @@ namespace Laboratorio5_EDD.Controllers
             AutosDto.Propietario = Request.Form["txtPropietario"].ToString();
             if (ComprobarNumeros(Latitud, -90, 90) != -1)
             {
-                AutosDto.Latitud = Convert.ToDecimal(Request.Form["NudLatitud"].ToString());
+                AutosDto.Latitud = Convert.ToDecimal(Latitud);
             }
             else {
                 ViewBag.Message = "La latitud se sale del rango de -90 y 90";
@@ -72,7 +72,7 @@ namespace Laboratorio5_EDD.Controllers
 
             if (ComprobarNumeros(Longitud, -180, 180) != -1)
             {
-                AutosDto.Longitud = Convert.ToDecimal(Request.Form["NudLongitud"].ToString());
+                AutosDto.Longitud = Convert.ToDecimal(Longitud);
             }
             else {
                 ViewBag.Message = "La logitud se sale del rango de -180 y 180";

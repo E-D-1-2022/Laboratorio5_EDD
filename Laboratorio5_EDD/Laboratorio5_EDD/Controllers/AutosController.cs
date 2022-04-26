@@ -9,6 +9,7 @@ using Laboratorio5_EDD.Entidad;
 using System.Drawing;
 using System.IO;
 using Microsoft.AspNetCore.Http;
+using System.ComponentModel.DataAnnotations;
 
 namespace Laboratorio5_EDD.Controllers
 {
@@ -97,6 +98,61 @@ namespace Laboratorio5_EDD.Controllers
         public IActionResult SubirArchivos() {
             return View();
         }
+
+        private static int verificador;
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public IActionResult EditarAuto(string id, IFormCollection collection)
+        //{
+        //    try
+        //    {
+        //        var editar = BaseDeDatos.ListaAutos.Find(new AutosDTO());
+
+        //        if(verificador == 3) //Latitud
+        //        {
+        //            editar = BaseDeDatos.ListaAutos.Find(new AutosDTO());
+        //        }
+        //        else if (verificador == 4) //Longitud
+        //        {
+        //            editar = BaseDeDatos.ListaAutos.Find(new AutosDTO());
+        //        }
+
+        //        editar.Latitud = Convert.ToInt32(collection["Latitud"]);
+        //        editar.Longitud = Convert.ToInt32(collection["Longitud"]);
+        //        return View(editar);
+        //    }
+        //    catch(Exception ex)
+        //    {
+        //        ViewBag.Error = ex.Message;
+        //    }
+        //    return RedirectToAction();
+        //}
+
+        public ActionResult EditarAuto(int Id)
+        {
+            AutosDTO model = new AutosDTO();
+
+            using(var db = new)
+            {
+                var user = db.user.Find(Id);
+                model.Latitud = user.Latitud;
+                model.Longitud = user.Longitud;
+            }
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult EditarAuto(AutosDTO int Id)
+        {
+            AutosDTO model = new AutosDTO();
+
+            if(!ModelState.IsValid)
+            {
+
+            }
+            
+        }
+
         [HttpPost]
         public IActionResult CargarData(IFormFile file) {
             if (file != null)

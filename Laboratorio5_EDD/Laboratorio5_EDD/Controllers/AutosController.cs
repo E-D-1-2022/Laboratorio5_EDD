@@ -9,6 +9,7 @@ using Laboratorio5_EDD.Entidad;
 using System.Drawing;
 using System.IO;
 using Microsoft.AspNetCore.Http;
+using System.ComponentModel.DataAnnotations;
 
 namespace Laboratorio5_EDD.Controllers
 {
@@ -97,10 +98,66 @@ namespace Laboratorio5_EDD.Controllers
         public IActionResult SubirArchivos() {
             return View();
         }
+
+        private static int verificador;
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public IActionResult EditarAuto(string id, IFormCollection collection)
+        //{
+        //    try
+        //    {
+        //        var editar = BaseDeDatos.ListaAutos.Find(new AutosDTO());
+
+        //        if(verificador == 3) //Latitud
+        //        {
+        //            editar = BaseDeDatos.ListaAutos.Find(new AutosDTO());
+        //        }
+        //        else if (verificador == 4) //Longitud
+        //        {
+        //            editar = BaseDeDatos.ListaAutos.Find(new AutosDTO());
+        //        }
+
+        //        editar.Latitud = Convert.ToInt32(collection["Latitud"]);
+        //        editar.Longitud = Convert.ToInt32(collection["Longitud"]);
+        //        return View(editar);
+        //    }
+        //    catch(Exception ex)
+        //    {
+        //        ViewBag.Error = ex.Message;
+        //    }
+        //    return RedirectToAction();
+        //}
+
+        public ActionResult EditarAuto(int Id)
+        {
+            AutosDTO model = new AutosDTO();
+
+            using(var db = new)
+            {
+                var user = db.user.Find(Id);
+                model.Latitud = user.Latitud;
+                model.Longitud = user.Longitud;
+            }
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult EditarAuto(AutosDTO int Id)
+        {
+            AutosDTO model = new AutosDTO();
+
+            if(!ModelState.IsValid)
+            {
+
+            }
+            
+        }
+
         [HttpPost]
         public IActionResult CargarData(IFormFile file) {
             if (file != null)
             {
+                
                 try
                 {
                     //Sube archivo a carpeta temporal
@@ -111,15 +168,54 @@ namespace Laboratorio5_EDD.Controllers
                     }
 
                     //Lee el archivo
-                    string allFileData = System.IO.File.ReadAllText(ruta);
+                    string allFileData = System.IO.File.ReadAllText(ruta);                  
 
                     //Recorre archivo
                     foreach (string lineaActual in allFileData.Split('\n'))
                     {
                         if (!string.IsNullOrEmpty(lineaActual))
                         {
+                            //Separa 
                             string[] info = lineaActual.Split(',');
+                            int Placa = Convert.ToInt32(info[0]);
 
+                            //Valida información
+
+                            var AutosDto = new AutosDTO();
+                            if (info[0].ToString().Length == 6)
+                            {
+                                AutosDto.Placa = Placa;
+                            }
+                            else
+                            {
+                                ViewBag.Message = "La Placa no puede tener más de 6 digitos";
+                                
+                            }
+                            AutosDto.color = Color.FromName(Request.Form["txtColor"].ToString());
+                            AutosDto.Propietario = Request.Form["txtPropietario"].ToString();
+                            if (ComprobarNumeros(info[3], -90, 90) != -1)
+                            {
+                                AutosDto.Latitud = Convert.ToDecimal(Request.Form["NudLatitud"].ToString());
+                            }
+                            else
+                            {
+                                ViewBag.Message = "La latitud se sale del rango de -90 y 90";
+                              
+                            }
+
+                            if (ComprobarNumeros(info[4], -180, 180) != -1)
+                            {
+                                AutosDto.Longitud = Convert.ToDecimal(Request.Form["NudLongitud"].ToString());
+                            }
+                            else
+                            {
+                                ViewBag.Message = "La logitud se sale del rango de -180 y 180";
+                                return View();
+                            }
+                            BaseDeDatos.ListaAutos.Add(AutosDto);
+                            ViewData["Mensaje"] = "Auto con placa: " + AutosDto.Placa + " Del Propietario: " + AutosDto.Propietario;
+
+                            //Guarda
                             BaseDeDatos.ListaAutos.Add(new AutosDTO
                             {
                                 Placa = Convert.ToInt32(info[0]),

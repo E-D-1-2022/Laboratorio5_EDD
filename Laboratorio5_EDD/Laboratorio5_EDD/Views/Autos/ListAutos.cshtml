@@ -49,7 +49,10 @@
                 @item.Longitud
             </td>
             <td>
-                <a  class="btn btn-danger"  asp-controller="Autos" asp-route-Placa="@item.Placa" asp-action="EliminarAuto">Eliminar carro</a>
+                <a class="btn btn-danger" asp-controller="Autos" asp-route-Placa="@item.Placa" asp-action="EliminarAuto">Eliminar carro</a>
+            </td>
+            <td>
+                <input type="button" value="Editar" class="btn btn-default" />
             </td>
         </tr>
 }

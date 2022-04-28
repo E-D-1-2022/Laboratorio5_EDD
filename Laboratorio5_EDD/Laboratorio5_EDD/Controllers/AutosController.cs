@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Web;
+using System.Net;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -9,7 +10,7 @@ using Laboratorio5_EDD.Entidad;
 using System.Drawing;
 using System.IO;
 using Microsoft.AspNetCore.Http;
-using System.ComponentModel.DataAnnotations;
+using Laboratorio5_EDD.Models;
 
 namespace Laboratorio5_EDD.Controllers
 {
@@ -100,58 +101,82 @@ namespace Laboratorio5_EDD.Controllers
         }
 
         private static int verificador;
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public IActionResult EditarAuto(string id, IFormCollection collection)
-        //{
-        //    try
-        //    {
-        //        var editar = BaseDeDatos.ListaAutos.Find(new AutosDTO());
-
-        //        if(verificador == 3) //Latitud
-        //        {
-        //            editar = BaseDeDatos.ListaAutos.Find(new AutosDTO());
-        //        }
-        //        else if (verificador == 4) //Longitud
-        //        {
-        //            editar = BaseDeDatos.ListaAutos.Find(new AutosDTO());
-        //        }
-
-        //        editar.Latitud = Convert.ToInt32(collection["Latitud"]);
-        //        editar.Longitud = Convert.ToInt32(collection["Longitud"]);
-        //        return View(editar);
-        //    }
-        //    catch(Exception ex)
-        //    {
-        //        ViewBag.Error = ex.Message;
-        //    }
-        //    return RedirectToAction();
-        //}
-
-        public ActionResult EditarAuto(int Id)
+        public IActionResult EditarAuto(string id)
         {
-            AutosDTO model = new AutosDTO();
+            var editar = BaseDeDatos.ListaAutos.Find(new AutosDTO());
 
-            using(var db = new)
+            if (verificador == 3) //Latitud
             {
-                var user = db.user.Find(Id);
-                model.Latitud = user.Latitud;
-                model.Longitud = user.Longitud;
+                editar = BaseDeDatos.ListaAutos.Find(new AutosDTO());
             }
-            return View(model);
+            else if (verificador == 4) //Longitud
+            {
+                editar = BaseDeDatos.ListaAutos.Find(new AutosDTO());
+            }
+
+            return View(editar);
         }
 
         [HttpPost]
-        public ActionResult EditarAuto(AutosDTO int Id)
+        [ValidateAntiForgeryToken]
+        public IActionResult EditarAuto(string id, IFormCollection collection)
         {
-            AutosDTO model = new AutosDTO();
-
-            if(!ModelState.IsValid)
+            try
             {
+                var editar = BaseDeDatos.ListaAutos.Find(new AutosDTO());
+
+                if (verificador == 3) //Latitud
+                {
+                    editar = BaseDeDatos.ListaAutos.Find(new AutosDTO());
+                }
+                else if (verificador == 4) //Longitud
+                {
+                    editar = BaseDeDatos.ListaAutos.Find(new AutosDTO());
+                }
+
+                editar.Latitud = Convert.ToInt32(collection["Latitud"]);
+                editar.Longitud = Convert.ToInt32(collection["Longitud"]);
+                return View(editar);
 
             }
-            
+            catch (Exception ex)
+            {
+                ViewBag.Error = ex.Message;
+            }
+            return RedirectToAction();
         }
+
+        //public ActionResult EditarAuto(int Id)
+        //{
+        //    AutosDTO model = new AutosDTO();
+
+        //    using(var db = new ())
+        //    {
+        //        var user = db.user.Find(Id);
+        //        model.Latitud = user.info[3];
+        //        model.Longitud = user.info[4];
+        //    }
+        //    return View(model);
+        //}
+
+        //[HttpPost]
+        //public ActionResult EditarAuto(AutosDTO model)
+        //{
+
+        //    if(!ModelState.IsValid)
+        //    {
+        //        return View(model);
+        //    }
+
+        //    using (var db = new)
+        //    {
+        //        var user = db.user.Find(Id);
+        //        model.Latitud = user.info[3];
+        //        model.Longitud = user.info[4];
+        //    }
+
+        //    return View();
+        //}
 
         [HttpPost]
         public IActionResult CargarData(IFormFile file) {

@@ -4,84 +4,18 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Drawing;
 
 namespace Laboratorio5_EDD.Models
 {
-    public class Auto : Controller
+    public class Auto 
     {
-        // GET: Auto
-        public ActionResult Index()
-        {
-            return View();
-        }
+        public int Placa { get; set; }
+        public Color color { get; set; }
 
-        // GET: Auto/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
+        public string Propietario { get; set; }
 
-        // GET: Auto/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: Auto/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: Auto/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: Auto/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: Auto/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: Auto/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
+        public decimal Latitud { get; set; }
+        public decimal Longitud { get; set; }
     }
 }

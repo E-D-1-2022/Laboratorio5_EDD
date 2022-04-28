@@ -162,10 +162,11 @@ namespace Laboratorio5_EDD.Controllers
                 
                 try
                 {
+                    string FilePath = Path.Combine("C:\\Users\\pcpis\\Documents\\" + file.FileName);
                     //Sube archivo a carpeta temporal
-                    string ruta = Path.Combine(Path.GetTempPath(), file.Name);
+                    //string ruta = Path.Combine(Path.GetTempPath(), file.Name);
 
-                    StreamReader sr = new StreamReader(ruta);
+                    StreamReader sr = new StreamReader(FilePath);
 
                     //Recorre archivo
                     string lineaActual="";

@@ -1,0 +1,62 @@
+﻿@using Laboratorio5_EDD.DTO;
+@{
+    ViewData["Title"] = "EditarVehiculo";
+}
+
+
+@{AutosDTO _AutosDTO = (AutosDTO)ViewData["DataAuto"];}
+@if (ViewBag.Message != null)
+{
+    <script type="text/javascript">
+         window.onload = function () {
+                alert("@ViewBag.Message");
+                window.location.href = "../Autos/ListAutos";
+            };
+
+    </script>
+}
+else
+{
+    <div class="container">
+        <div class="card border border-black rounded">
+
+            <div class="card-header">
+
+                <h5 class="card-title text-center">Guardar Autos</h5>
+            </div>
+            <div class="card-body">
+                <form asp-controller="Autos" asp-action="ActualizarVehiculo">
+                    <div class="form-group">
+                        <label for="txtPlaca" class="form-label">Placa:</label>
+                        <input type="text" id="txtPlaca" name="txtPlaca" value="@_AutosDTO.Placa" class="form-control" readonly/>
+                    </div>
+                    <div class="form-group">
+                        <label for="txtColor" class="form-label">Color:</label>
+                        <input type="color" id="txtColor" name="txtColor" value="@_AutosDTO.color.Name" class="form-control" readonly/>
+                    </div>
+                    <div class="form-group">
+                        <label for="txtPropietario" class="form-label">Propietario:</label>
+                        <input type="text" id="txtPropietario" name="txtPropietario" value="@_AutosDTO.Propietario" class="form-control" readonly/>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col">
+                                <label for="NudLatitud" class="form-label">Latitud:</label>
+                                <input type="text" id="NudLatitud" name="NudLatitud" value="@_AutosDTO.Latitud" class="form-control" />
+                            </div>
+                            <div class="col">
+                                <label for="NudLongitud" class="form-label">Longitud:</label>
+                                <input type="text" id="NudLongitud" name="NudLongitud" value="@_AutosDTO.Longitud" class="form-control" />
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="d-flex align-items-center justify-content-center mt-5">
+                        <input type="submit" class="btn btn-primary" value="Guardar Auto">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+}
+

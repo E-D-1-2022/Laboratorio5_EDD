@@ -156,7 +156,7 @@ namespace Laboratorio5_EDD.Controllers
         public IActionResult SubirArchivos() {
             return View();
         }
-<<<<<<< HEAD
+
 
         private static int verificador;
         public IActionResult EditarAuto(string id)
@@ -236,8 +236,6 @@ namespace Laboratorio5_EDD.Controllers
         //    return View();
         //}
 
-=======
->>>>>>> b47d93da68ccd43c794842be198d8ae463f625d2
         [HttpPost]
         public IActionResult CargarData(IFormFile file) {
             if (file != null)
@@ -245,7 +243,7 @@ namespace Laboratorio5_EDD.Controllers
                 
                 try
                 {
-                    string FilePath = Path.Combine("C:\\Users\\pcpis\\Documents\\" + file.FileName);
+                    string FilePath = Path.Combine("C:\\Users\\Usuario\\Documents\\" + file.FileName);
                     //Sube archivo a carpeta temporal
                     //string ruta = Path.Combine(Path.GetTempPath(), file.Name);
 

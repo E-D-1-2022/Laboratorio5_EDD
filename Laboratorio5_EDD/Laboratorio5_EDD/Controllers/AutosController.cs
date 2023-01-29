@@ -15,7 +15,6 @@ namespace Laboratorio5_EDD.Controllers
 {
     public class AutosController : Controller
     {
-
         public IActionResult Index()
         {
             return View();
@@ -44,7 +43,6 @@ namespace Laboratorio5_EDD.Controllers
                 return -1;
             }
         }
-
         public IActionResult GuardarCarro() {
             var AutosDto = new AutosDTO();
             int Placa = Convert.ToInt32(Request.Form["txtPlaca"].ToString());
@@ -81,7 +79,6 @@ namespace Laboratorio5_EDD.Controllers
             ViewData["Mensaje"] = "Auto con placa: " + AutosDto.Placa + " Del Propietario: " + AutosDto.Propietario;
             return View();
         }
-
         [HttpGet]
         public IActionResult EditarVehiculo(int Placa = 0) {
             AutosDTO Busqueda = null;

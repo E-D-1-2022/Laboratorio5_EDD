@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Web;
+using System.Net;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -9,7 +10,7 @@ using Laboratorio5_EDD.Entidad;
 using System.Drawing;
 using System.IO;
 using Microsoft.AspNetCore.Http;
-using System.ComponentModel.DataAnnotations;
+using Laboratorio5_EDD.Models;
 
 namespace Laboratorio5_EDD.Controllers
 {
@@ -152,6 +153,86 @@ namespace Laboratorio5_EDD.Controllers
         public IActionResult SubirArchivos() {
             return View();
         }
+
+
+        private static int verificador;
+        public IActionResult EditarAuto(string id)
+        {
+            var editar = BaseDeDatos.ListaAutos.Find(new AutosDTO());
+
+            if (verificador == 3) //Latitud
+            {
+                editar = BaseDeDatos.ListaAutos.Find(new AutosDTO());
+            }
+            else if (verificador == 4) //Longitud
+            {
+                editar = BaseDeDatos.ListaAutos.Find(new AutosDTO());
+            }
+
+            return View(editar);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult EditarAuto(string id, IFormCollection collection)
+        {
+            try
+            {
+                var editar = BaseDeDatos.ListaAutos.Find(new AutosDTO());
+
+                if (verificador == 3) //Latitud
+                {
+                    editar = BaseDeDatos.ListaAutos.Find(new AutosDTO());
+                }
+                else if (verificador == 4) //Longitud
+                {
+                    editar = BaseDeDatos.ListaAutos.Find(new AutosDTO());
+                }
+
+                editar.Latitud = Convert.ToInt32(collection["Latitud"]);
+                editar.Longitud = Convert.ToInt32(collection["Longitud"]);
+                return View(editar);
+
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Error = ex.Message;
+            }
+            return RedirectToAction();
+        }
+
+        //public ActionResult EditarAuto(int Id)
+        //{
+        //    AutosDTO model = new AutosDTO();
+
+        //    using(var db = new ())
+        //    {
+        //        var user = db.user.Find(Id);
+        //        model.Latitud = user.info[3];
+        //        model.Longitud = user.info[4];
+        //    }
+        //    return View(model);
+        //}
+
+        //[HttpPost]
+        //public ActionResult EditarAuto(AutosDTO model)
+        //{
+
+        //    if(!ModelState.IsValid)
+        //    {
+        //        return View(model);
+        //    }
+
+        //    using (var db = new)
+        //    {
+        //        var user = db.user.Find(Id);
+        //        model.Latitud = user.info[3];
+        //        model.Longitud = user.info[4];
+        //    }
+
+        //    return View();
+        //}
+
         [HttpPost]
         public IActionResult CargarData(IFormFile file) {
             if (file != null)
@@ -159,7 +240,7 @@ namespace Laboratorio5_EDD.Controllers
                 
                 try
                 {
-                    string FilePath = Path.Combine("C:\\Users\\pcpis\\Documents\\" + file.FileName);
+                    string FilePath = Path.Combine("C:\\Users\\Usuario\\Documents\\" + file.FileName);
                     //Sube archivo a carpeta temporal
                     //string ruta = Path.Combine(Path.GetTempPath(), file.Name);
 
